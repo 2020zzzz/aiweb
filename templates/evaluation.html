@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}模型评估{% endblock title %}
+{% block navli %}
+
+    <ul class="nav navbar-nav navbar-right">
+        {% if session.is_login %}
+
+            <li><a href="/">您好！{{ session.name }}</a></li>
+            <li><img src="../static/sign.png" align="right" weight="50px"height="50px" ;></li>>
+            <li><a href="/profile">修改个人信息</a><li>
+            <li><a href="/logout">退出</a><li>
+        {% else %}
+
+            <li><a href="/">您好！</a></li>
+            <li><a href="/login">登录</a></li>
+            <li><a href="/register">注册</a></li>
+
+        {% endif %}
+    </ul>
+{% endblock navli %}
+{% block content %}
+
+    <div class="myban">
+           <h3 align="center">模型评估</h3>
+        <ul>
+            <li>
+            <img src= "/static/epoch_acc.png" alt="acc" width="304" height="228">
+            <img src= "/static/epoch_loss.png" alt="loss" width="304" height="228">
+            <img src= "/static/roc_test.png"  alt="roc" width="304" height="228">
+            </li>
+            <li>
+                <div class="hangnei"><p class="juzhong">123</p></div>
+                <div class="hangnei"><p class="juzhong">123</p></div>
+                <div class="hangnei"><p class="juzhong">123</p></div>
+            </li>
+        </ul>
+    </div>
+<style>
+    .hangnei{
+        display: inline-block;
+        width: 304px
+    }
+    .juzhong{
+        text-align: center;
+    }
+</style>
+{% endblock %}

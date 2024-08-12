@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}主页{% endblock %}
+{% block navli %}
+    <ul class="nav navbar-nav navbar-right">
+        {% if session.is_login %}
+            <li><a href="/">亲爱的用户{{ session.name }}，您好！</a></li>
+         <li><img src="../static/sign.png" align="right" weight="50px"height="50px" ;></li>>
+         <li><a href="/evaluation">模型评估</a></li>
+         <li><a href="/profile">修改个人信息</a><li>
+            <li><a href="/logout">退出</a><li>
+            {% else %}
+
+            <li><a href="/">您好！</a></li>
+            <li><a href="/evaluation">模型评估</a></li>
+
+            <li><a href="/login">登录</a></li>
+            <li><a href="/register">注册</a></li>
+        {% endif %}
+    </ul>
+{% endblock navli %}
+{% block content %}
+    <div class="container text-center">
+        {% if session.is_login %}
+            <h1>{{ session.name }}欢迎回来！</h1>
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">上传文件：</label>
+                    <input type="file" name="file" id="file" accept=".txt, .jpg, .png">
+                </div>
+                <button type="submit" class="btn btn-primary">上传</button>
+            </form>
+        {% else %}
+            <h1>请先登录！</h1>
+        {% endif %}
+    </div>
+{% endblock %}

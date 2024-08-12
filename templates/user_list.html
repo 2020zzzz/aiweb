@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}用户列表{% endblock title %}
+{% block navli %}
+    <ul class="nav navbar-nav navbar-right">
+        {% if session.is_login %}
+
+            <li><a href="/">您好！{{ session.name }}</a></li>
+            <li><img src="../static/sign.png" align="right" weight="50px"height="50px" ;></li>>
+            <li><a href="/evaluation">模型评估</a></li>
+            <li><a href="/profile">修改个人信息</a><li>
+            <li><a href="/logout">退出</a><li>
+        {% else %}
+
+            <li><a href="/">您好！</a></li>
+            <li><a href="/login">登录</a></li>
+            <li><a href="/register">注册</a></li>
+
+        {% endif %}
+    </ul>
+{% endblock navli %}
+{% block content %}
+    <div class="container">
+        <h2>用户列表</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>用户名</th>
+                    <th>密码</th>
+                    <th>邮箱</th>
+                    <th>检测总次数</th>
+                    <th>最近检测时间</th>
+                    <th>最近检测类型</th>
+                    <th>最近检测概率</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.password }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.total }}</td>
+                        <td>{{ user.endtime }}</td>
+                        <td>{{ user.types }}</td>
+                        <td>{{ user.P }}</td>
+                        <td>
+                            <a href="/user/delete/{{ user.id }}" class="btn btn-danger">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/user/add" class="btn btn-primary">新增用户</a>
+    </div>
+{% endblock %}
